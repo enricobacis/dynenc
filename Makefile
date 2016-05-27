@@ -4,10 +4,10 @@ PEMKEY  = key.pem
 TESTURL = 'http://127.0.0.1:8080/dynenc/helloworld'
 
 run runserver: | $(PEMKEY) venv
-	venv/bin/python server.py $(PEMKEY)
+	venv/bin/python src/server.py $(PEMKEY)
 
 runclient: | $(PEMKEY) venv
-	venv/bin/python client.py $(TESTURL) $(PEMKEY)
+	venv/bin/python src/client.py $(TESTURL) $(PEMKEY)
 
 $(PEMKEY):
 	@ python -c 'from Crypto.PublicKey import RSA; print RSA.generate(1024).exportKey()' | tee $@
